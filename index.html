@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare App UI Preview</title>
+    <style>
+        :root {
+            --rose-warm: #D97A6D;
+            --peach-sun: #F89B4F;
+            --gold-gentle: #ECD380;
+            --white-sand: #E8DDCF;
+            --gray-deep: #2B2B2B;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Source Han Sans', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .screen-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        
+        .phone-mockup {
+            width: 180px;
+            height: 390px;
+            border: 1px solid #999;
+            border-radius: 30px;
+            padding: 10px;
+            background-color: var(--white-sand);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .screen-label {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gray-deep);
+        }
+        
+        /* Header Styles */
+        .app-header {
+            text-align: center;
+            padding: 15px 0;
+        }
+        
+        .slogan {
+            font-family: 'Brittany Signature', cursive;
+            font-size: 22px;
+            color: var(--rose-warm);
+            margin-bottom: 10px;
+        }
+        
+        /* Map Area */
+        .map-container {
+            height: 120px;
+            background-color: #e0e0e0;
+            border-radius: 12px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        /* Floating Button */
+        .scan-button {
+            position: absolute;
+            width: 56px;
+            height: 56px;
+            background-color: var(--rose-warm);
+            border-radius: 50%;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 12px rgba(217, 122, 109, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: breath 2s infinite;
+            z-index: 10;
+        }
+        
+        @keyframes breath {
+            0% { box-shadow: 0 0 0 0 rgba(217,122,109,0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(217,122,109,0); }
+            100% { box-shadow: 0 0 0 0 rgba(217,122,109,0); }
+        }
+        
+        /* Point Cards */
+        .point-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            position: relative;
+        }
+        
+        .point-status {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .status-available {
+            background-color: #5CB85C;
+        }
+        
+        .status-low {
+            background-color: var(--peach-sun);
+        }
+        
+        /* Bottom Nav */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            background-color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+        }
+        
+        /* Emotion Selection */
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 15px;
+        }
+        
+        .emotion-btn {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gold-gentle);
+            transition: all 0.2s;
+        }
+        
+        .emotion-btn:hover {
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        /* Community Cards */
+        .post-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        /* Profile Section */
+        .calendar {
+            height: 120px;
+            background-color: white;
+            border-radius: 12px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .period-indicator {
+            position: absolute;
+            width: 30%;
+            height: 20px;
+            background: linear-gradient(90deg, rgba(217,122,109,0.2), rgba(217,122,109,0.5));
+            border-radius: 20px;
+            top: 50%;
+            left: 15%;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+        }
+        
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--rose-warm);
+            color: var(--rose-warm);
+            background: transparent;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--rose-warm);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>LunaCare App UI Preview</h1>
+    
+    <!-- First Row: Core Screens -->
+    <div class="screen-row">
+        <!-- Home Screen -->
+        <div>
+            <div class="screen-label">Home (🏠)</div>
+            <div class="phone-mockup">
+                <div class="app-header">
+                    <div class="slogan">Segui la tua luna</div>
+                </div>
+                <div class="map-container"></div>
+                <div class="point-card">
+                    <div style="flex: 1;">
+                        <strong>Café Luna</strong>
+                        <p>200m away</p >
+                    </div>
+                    <div class="point-status status-available"></div>
+                </div>
+                <div class="point-card">
+                    <div style="flex: 1;">
+                        <strong>University WC</strong>
+                        <p>350m away</p >
+                    </div>
+                    <div class="point-status status-low"></div>
+                </div>
+                <div class="scan-button">📷</div>
+                <div class="bottom-nav">
+                    <div class="nav-item">🏠<span>Home</span></div>
+                    <div class="nav-item">📍<span>Find</span></div>
+                    <div class="nav-item">🌀<span>Mood</span></div>
+                    <div class="nav-item">🌸<span>Community</span></div>
+                    <div class="nav-item">👤<span>Me</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map Screen -->
+        <div>
+            <div class="screen-label">Map (📍)</div>
+            <div class="phone-mockup">
+                <div style="height: 100%; position: relative;">
+                    <div style="height: 40px; display: flex; padding: 10px; gap: 8px;">
+                        <div style="flex: 1; background: white; border-radius: 20px;"></div>
+                        <div style="width: 40px; height: 40px; background: white; border-radius: 12px;"></div>
+                    </div>
+                    <div class="map-container" style="height: calc(100% - 40px);"></div>
+                    <div style="position: absolute; bottom: 70px; right: 15px; width: 40px; height: 40px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center;">📍</div>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item">🏠<span>Home</span></div>
+                    <div class="nav-item">📍<span>Find</span></div>
+                    <div class="nav-item">🌀<span>Mood</span></div>
+                    <div class="nav-item">🌸<span>Community</span></div>
+                    <div class="nav-item">👤<span>Me</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Emotion Selection -->
+        <div>
+            <div class="screen-label">Emotion Select (🌀)</div>
+            <div class="phone-mockup">
+                <div style="padding: 15px;">
+                    <h3 style="margin-bottom: 20px;">How are you feeling today?</h3>
+                    <div class="emotion-grid">
+                        <div class="emotion-btn">😊<span>Happy</span></div>
+                        <div class="emotion-btn">😢<span>Sad</span></div>
+                        <div class="emotion-btn">😠<span>Angry</span></div>
+                        <div class="emotion-btn">😰<span>Anxious</span></div>
+                        <div class="emotion-btn">😔<span>Lonely</span></div>
+                        <div class="emotion-btn">💪<span>Strong</span></div>
+                    </div>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item">🏠<span>Home</span></div>
+                    <div class="nav-item">📍<span>Find</span></div>
+                    <div class="nav-item">🌀<span>Mood</span></div>
+                    <div class="nav-item">🌸<span>Community</span></div>
+                    <div class="nav-item">👤<span>Me</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Emotion Support -->
+        <div>
+            <div class="screen-label">Emotion Support</div>
+            <div class="phone-mockup">
+                <div style="padding: 20px; text-align: center; height: calc(100% - 60px); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 40px; margin-bottom: 15px;">😢</div>
+                    <h3 style="margin-bottom: 10px;">It's okay to feel sad</h3>
+                    <p style="margin-bottom: 20px;">Your feelings are valid. Would you like to try some breathing exercises?</p >
+                    <div style="display: flex; justify-content: center; gap: 15px;">
+                        <div style="padding: 10px 15px; background: var(--peach-sun); color: white; border-radius: 20px;">Breathe</div>
+                        <div style="padding: 10px 15px; border: 1px solid var(--peach-sun); color: var(--peach-sun); border-radius: 20px;">Hug</div>
+                    </div>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item">🏠<span>Home</span></div>
+                    <div class="nav-item">📍<span>Find</span></div>
+                    <div class="nav-item">🌀<span>Mood</span></div>
+                    <div class="nav-item">🌸<span>Community</span></div>
+                    <div class="nav-item">👤<span>Me</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Community -->
+        <div>
+            <div class="screen-label">Community (🌸)</div>
+            <div class="phone-mockup">
+                <div style="padding: 15px;">
+                    <h3 style="margin-bottom: 15px;">Today's Stories</h3>
+                    <div class="post-card">
+                        <div class="post-meta">
+                            <div style="width: 30px; height: 30px; background: var(--gold-gentle); border-radius: 50%; margin-right: 10px;"></div>
+                            <div>
+                                <strong>Maria</strong>
+                                <p>Shared her story</p >
+                            </div>
+                        </div>
+                        <p>"Today I asked for a pad at work and my male colleague didn't make it weird..."</p >
+                    </div>
+                    <div class="post-card">
+                        <div class="post-meta">
+                            <div style="width: 30px; height: 30px; background: var(--gold-gentle); border-radius: 50%; margin-right: 10px;"></div>
+                            <div>
+                                <strong>Lina</strong>
+                                <p>Posted a quote</p >
+                            </div>
+                        </div>
+                        <p>"My cycle doesn't make me weak - it makes me a creator of life"</p >
+                    </div>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item">🏠<span>Home</span></div>
+                    <div class="nav-item">📍<span>Find</span></div>
+                    <div class="nav-item">🌀<span>Mood</span></div>
+                    <div class="nav-item">🌸<span>Community</span></div>
+                    <div class="nav-item">👤<span>Me</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile -->
+        <div>
+            <div class="screen-label">Profile (👤)</div>
+            <div class="phone-mockup">
+                <div style="padding: 15px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <div style="width: 50px; height: 50px; background: var(--gold-gentle); border-radius: 50%; margin-right: 15px;"></div>
+                        <div>
+                            <h3 style="margin: 0;">Hello, Sofia</h3>
+                            <p style="margin: 0; color: var(--rose-warm);">Day 12 of cycle</p >
+                        </div>
+                    </div>
+                    
+                    <div class="calendar">
+                        <div class="period-indicator"></div>
+                    </div>
+                    
+                    <h4 style="margin-bottom: 10px;">Language</h4>
+                    <div class="language-selector">
+                        <button class="lang-btn">EN</button>
+                        <button class="lang-btn">IT</button>
+                        <button class="lang-btn active">中文</button>
+                    </div>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item">🏠<span>Home</span></div>
+                    <div class="nav-item">📍<span>Find</span></div>
+                    <div class="nav-item">🌀<span>Mood</span></div>
+                    <div class="nav-item">🌸<span>Community</span></div>
+                    <div class="nav-item">👤<span>Me</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Second Row: Additional Screens -->
+    <div class="screen-row">
+        <!-- [Additional screens would continue here...] -->
+    </div>
+</body>
+</html>
